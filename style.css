@@ -1,0 +1,455 @@
+/* =========================
+   Font
+   ========================= */
+@font-face {
+    font-family: "my-font";
+    src: url("./Pia_font-Regular.otf") format("opentype");
+}
+
+.my-font {
+    font-family: "my-font", serif;
+}
+
+/* =========================
+   Base / Typography
+   ========================= */
+body {
+    font-family: "my-font", serif;
+    font-size: 70px;
+    color: white;
+    transition: background 0.4s ease, color 0.4s ease;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./woods.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    scroll-snap-type: y proximity;
+}
+
+.typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    width: fit-content;
+    clip-path: inset(0 100% 0 0);
+    animation: reveal 2.5s ease forwards;
+}
+
+@keyframes reveal {
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+p, label {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 200px;
+}
+
+h3, h4 {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+ul {
+    margin-top: 5px;
+    font-size: 30px;
+    text-align: left;
+    align-self: flex-start;
+}
+
+hr {
+    border: none;
+    height: 5px;
+    background-color: #75ba52;
+}
+
+/* =========================
+   Scroll Panels
+   ========================= */
+.panel {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+
+    scroll-snap-align: start;
+
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* =========================
+   Personality Cards
+   ========================= */
+.personality {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.card {
+    width: 290px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+                opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), translate 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+
+    opacity: 0;
+    translate: 0 20px;
+}
+
+.panel.show .card {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.panel.show .card:nth-child(1) { transition-delay: 0.05s; }
+.panel.show .card:nth-child(2) { transition-delay: 0.15s; }
+.panel.show .card:nth-child(3) { transition-delay: 0.25s; }
+.panel.show .card:nth-child(4) { transition-delay: 0.35s; }
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: #75ba52;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .2);
+}
+
+.card h4 {
+    font-size: 48px;
+    transition: color .3s;
+}
+
+.card:hover h4 {
+    color: #a8e08c;
+}
+
+/* =========================
+   Try It Yourself — Input & Workspace
+   ========================= */
+.content-container {
+    width: min(1400px, 100%);
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.panel-preview .content-container h3 {
+    text-align: center;
+}
+
+.try-container {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#userInput {
+    display: block;
+    width: 100%;
+    margin: 40px auto 20px auto;
+    padding: 18px;
+    font-size: 18px;
+    color: white;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#userInput:hover {
+    border-color: rgba(117, 186, 82, 0.6);
+}
+
+#userInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#userInput:focus {
+    outline: none;
+    border-color: #75ba52;
+}
+
+.workspace {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 30px;
+}
+
+/* --- Controls panel --- */
+.control-panel {
+    width: 320px;
+    flex-shrink: 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.control-panel:hover {
+    transform: translateY(-6px);
+    border-color: #75ba52;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, .35);
+}
+
+.control-panel h4 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.control {
+    margin-bottom: 25px;
+}
+
+.control label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.control input {
+    width: 100%;
+}
+
+.control input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #75ba52;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.control input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: #a8e08c;
+}
+
+.control input[type="range"]::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.control input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #75ba52;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.control input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    background: #a8e08c;
+}
+
+/* --- Live preview box --- */
+.preview-box {
+    flex: 1;
+    min-width: 0;
+    min-height: 220px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-box:hover {
+    border-color: rgba(117, 186, 82, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .35);
+}
+
+#preview {
+    margin: 0;
+    font-family: "my-font", serif;
+    font-size: 60px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.animate {
+    animation: pop .25s;
+}
+
+@keyframes pop {
+    0% { transform: scale(.96); }
+    100% { transform: scale(1); }
+}
+
+/* =========================
+   FAQ
+   ========================= */
+.panel-faq {
+    padding: 80px 20px;
+}
+
+.faq-item {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.faq-question {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    font-size: 20px;
+    text-align: left;
+    color: white;
+    font-family: inherit;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    cursor: pointer;
+
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-question:hover {
+    transform: translateY(-2px);
+    border-color: #75ba52;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+}
+
+.faq-answer {
+    display: none;
+    padding: 18px;
+    color: rgba(255, 255, 255, 0.85);
+
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+.faq-answer p {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+/* =========================
+   Footer
+   ========================= */
+footer{
+    padding:60px 20px;
+    color:white;
+    text-align:center;
+}
+
+footer h3{
+    font-size:40px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+footer p{
+    margin:10px 0;
+}
+
+.footer-links{
+    margin:30px 0;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 30px 30px;
+
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+
+}
+
+.footer-links a:hover{
+    transform: translateY(-2px);
+    border-color: #75ba52;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+
+}
